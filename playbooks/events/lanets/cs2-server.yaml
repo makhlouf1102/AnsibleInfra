@@ -1,14 +1,12 @@
 ---
-# Déploie le serveur CS2 complet (prérequis système + server) sur la VM cs2 (LanETS).
+# Déploie le serveur CS2 depuis l'image publiée, avec Docker Compose.
 # Hôtes : cs2
 # Usage : make events/lanets/cs2-server
 
-- name: Deploying cs2 server
+- name: Deploying the CS2 server with Docker Compose
   hosts: cs2
+  become: true
   tasks:
-    - name: Installing prerequise for cs2 server deployment
+    - name: Install Docker, pull the published image, and run CS2
       ansible.builtin.include_role:
-        name: lanets.cs2.deployment_prerequisites
-    - name: Deploying cs2 server
-      ansible.builtin.include_role:
-        name: lanets.cs2.deploy_server
+        name: lanets.cs2.csm
